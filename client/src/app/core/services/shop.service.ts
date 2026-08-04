@@ -37,12 +37,14 @@ export class ShopService {
     }
 
     getProduct(id: number) {
+        debugger;
     return this.http.get<Product>(this.baseUrl + 'products/' + id);
         console.log(this.baseUrl + 'products/' + id);
     }
 
 
     getBrands(){
+        debugger;
         if(this.brands.length > 0) return;
         return this.http.get<string[]>(this.baseUrl + 'products/brands').subscribe({
             next: response => this.brands = response

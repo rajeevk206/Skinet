@@ -43,6 +43,7 @@ export class ProductDetails implements OnInit {
   }
 
   loadProduct() {
+  debugger;
   const id = this.activatedRoute.snapshot.paramMap.get('id');
    if (!id) return;
   this.shopService.getProduct(+id).subscribe({

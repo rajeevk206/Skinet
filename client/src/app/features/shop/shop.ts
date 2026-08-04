@@ -59,12 +59,14 @@ export class Shop implements OnInit{
   }
 
   handlePageEvent(event: PageEvent) {
+    debugger;
     this.shopParams.pageNumber = event.pageIndex + 1;
     this.shopParams.pageSize = event.pageSize;
     this.getProducts();
   }
   
   getProducts() {
+    debugger;
   this.shopService.getProducts(this.shopParams).subscribe({
     next: response => {
       this.products.set(response);
@@ -73,11 +75,13 @@ export class Shop implements OnInit{
 }
 
 onSearchChange() {
+    debugger;
     this.shopParams.pageNumber = 1;
     this.getProducts();
   }
 
   onSortChange(event: MatSelectionListChange) {
+    debugger;
     const selectedOption = event.options[0];
     if (selectedOption) {
       this.shopParams.sort = selectedOption.value;
@@ -86,6 +90,7 @@ onSearchChange() {
   }
 
    openFiltersDialog() {
+    debugger;
   const dialogRef = this.dialogService.open(FiltersDailog, {
     minWidth: '500px',
     data: {
