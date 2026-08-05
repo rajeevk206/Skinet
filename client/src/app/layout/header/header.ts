@@ -5,6 +5,8 @@ import { MatIcon } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { BusyService } from '../../core/services/busy.service';
 import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatDivider } from '@angular/material/divider';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -15,14 +17,15 @@ import { MatProgressBar } from '@angular/material/progress-bar';
     MatButton,
     RouterLink,
     RouterLinkActive,
-    MatProgressBar
-],
+    MatProgressBar,
+  ],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
 
 export class Header {
   busyService = inject(BusyService);
+  cartService = inject(CartService);
 
   constructor() {
     effect(() => {
