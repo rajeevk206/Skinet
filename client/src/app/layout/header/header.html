@@ -17,15 +17,15 @@
                 class="custom-badge mt-2 mr-2">
                 <mat-icon>shopping_cart</mat-icon>
             </a>
-            <!-- @if (accountService.currentUser()) {
+            @if (accountService.currentUser()) {
                 <button mat-button [matMenuTriggerFor]="menu">
                     <mat-icon>arrow_drop_down</mat-icon>
                     <span>{{accountService.currentUser()?.email}}</span>
                 </button>
-            } @else { -->
+           } @else {
                 <button routerLink="/account/login" mat-stroked-button>Login</button>
                 <button routerLink="/account/register" mat-stroked-button>Register</button>
-            <!-- } -->
+            }
 
         </div>
     </div>
@@ -35,7 +35,7 @@
   <mat-progress-bar mode="indeterminate" class="fixed top-20 z-50"></mat-progress-bar>
 }
 
-<!-- <mat-menu #menu="matMenu" class="px-5">
+<mat-menu #menu="matMenu" class="px-5">
     <button mat-menu-item class="px-3" routerLink="/cart">
         <mat-icon>shopping_cart</mat-icon>
         My cart
@@ -49,4 +49,4 @@
         <mat-icon>logout</mat-icon>
         Logout
     </button>
-</mat-menu> -->
+</mat-menu>
