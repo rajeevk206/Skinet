@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { MatInput } from "@angular/material/input";
 import { CartService } from '../../../core/services/cart.service';
 import { CommonModule } from '@angular/common';
+import { StripeService } from '../../../core/services/stripe.service';
 
 @Component({
   selector: 'app-order-summary',
@@ -22,4 +23,8 @@ import { CommonModule } from '@angular/common';
 })
 export class OrderSummary {
   cartService = inject(CartService);
+  private stripeService = inject(StripeService);
+  //location = inject(Location);
+  code?: string;
+
 }

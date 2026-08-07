@@ -28,12 +28,18 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
     var configuration = ConfigurationOptions.Parse(connString, true);
     return ConnectionMultiplexer.Connect(configuration);
 });
-builder.Services.AddSingleton<ICartService, CartService>();
+
+builder.Services.AddScoped(typeof(GenericRepository<>));
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+//builder.Services.AddSingleton<ICartService, CartService>();
 
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<AppUser>()
     // .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<StoreContext>();
+
+ 
     
 var app = builder.Build();
 

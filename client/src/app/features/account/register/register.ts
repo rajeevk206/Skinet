@@ -22,7 +22,8 @@ import { TextInput } from '../../../shared/components/text-input/text-input';
     MatButton,
     JsonPipe,
     MatError,
-    TextInput
+    TextInput,
+    
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',

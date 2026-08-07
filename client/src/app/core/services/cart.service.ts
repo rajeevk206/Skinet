@@ -5,37 +5,46 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { submit } from '@angular/forms/signals';
+import { DeliveryMethod } from '../../shared/models/deliveryMethod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-    baseUrl = environment.apiUrl;
+  baseUrl = environment.apiUrl;
   private http = inject(HttpClient)
   cart = signal<Cart | null>(null);
   itemCount = computed(() =>{
     return this.cart()?.items.reduce((sum, item) => sum + item.quantity, 0)
   });
+  selectedDelivery = signal<DeliveryMethod | null>(null);
   totals = computed(() => {
-  const cart = this.cart();
+    const cart = this.cart();
+    const delivery = this.selectedDelivery();
 
-  if (!cart) return null;
+    if (!cart) return null;
+    const subtotal = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    
+    let discountValue = 0;
 
-  const subtotal = cart.items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+    if (cart.coupon) {
+      if (cart.coupon.amountOff) {
+        discountValue = cart.coupon.amountOff;
+      } else if (cart.coupon.percentOff) {
+        discountValue = subtotal * (cart.coupon.percentOff / 100);
+      }
+    }
+    
+    const shipping = delivery ? delivery.price : 0;
 
-  const shipping = 0;
-  const discount = 0;
-
-  return {
-    subtotal,
-    shipping,
-    discount,
-    total: subtotal + shipping - discount
-  };
-});
+    return {
+      subtotal,
+      shipping,
+      discount: discountValue,
+      total: subtotal + shipping - discountValue
+    }
+  })
+  
 
   getCart(id:string){
     return this.http.get<Cart>(this.baseUrl + 'cart?id=' +  id).pipe(
