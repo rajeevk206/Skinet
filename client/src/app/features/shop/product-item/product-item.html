@@ -1,0 +1,32 @@
+@if (product) {
+  <mat-card
+    appearance="raised"
+    [routerLink]="['/shop', product.id]"
+    class="group cursor-pointer overflow-hidden rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+    <div class="overflow-hidden">
+      <img
+        [src]="product.pictureUrl"
+        [alt]="'Image of ' + product.name"
+        class="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-105">
+    </div>
+
+    <mat-card-content class="mt-2">
+      <h2 class="text-sm font-semibold uppercase transition-colors duration-300 group-hover:text-blue-600">
+        {{ product.name }}
+      </h2>
+
+      <p class="font-light text-gray-600">
+        {{ product.price | currency }}
+      </p>
+    </mat-card-content>
+
+    <mat-card-actions (click)="$event.stopPropagation()">
+       <button mat-stroked-button class="w-full" (click)="cartService.addItemToCart(product)">
+        <mat-icon>add_shopping_cart</mat-icon>
+        Add to Cart
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+}

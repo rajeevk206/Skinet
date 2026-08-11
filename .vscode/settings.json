@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/30e9d2e7-4480-438a-8be7-ece9978a8277/resourceGroups/skinet-2026/providers/Microsoft.Web/sites/skinet",
+    "appService.deploySubpath": "API\\bin\\Publish"
+}
