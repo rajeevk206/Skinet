@@ -1,7 +1,7 @@
 import { Component, inject, input, output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+//import { RouterLink } from '@angular/router';
 import { BusyService } from '../../../core/services/busy.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { BusyService } from '../../../core/services/busy.service';
   imports: [
     MatIcon,
     MatButton,
-    RouterLink
+    //RouterLink
   ],
   templateUrl: './empty-state.html',
   styleUrl: './empty-state.scss',

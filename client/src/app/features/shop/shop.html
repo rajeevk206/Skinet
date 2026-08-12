@@ -1,54 +1,55 @@
-<!-- @if(products){ -->
-<div class="flex flex-col gap-3">
-    <div class="flex justify-between">
-        <mat-paginator
-                class="bg-white"
-                [length]="products()?.count ?? 0"
-                [pageSize]="shopParams.pageSize"
-                [pageIndex]="shopParams.pageNumber - 1"
-                [pageSizeOptions]="pageSizeOptions"
-                [showFirstLastButtons]="true"
-                (page)="handlePageEvent($event)">
-                aria-lable="Select page"
-        </mat-paginator>
+@if((products()?.count ?? 0) > 0){
+    <div class="flex flex-col gap-3">
+        <div class="flex justify-between">
+            <mat-paginator
+                    class="bg-white"
+                    [length]="products()?.count ?? 0"
+                    [pageSize]="shopParams.pageSize"
+                    [pageIndex]="shopParams.pageNumber - 1"
+                    [pageSizeOptions]="pageSizeOptions"
+                    [showFirstLastButtons]="true"
+                    (page)="handlePageEvent($event)"
+                    aria-lable="Select page"
+                > 
+            </mat-paginator>
 
-         <form 
-                #searchForm="ngForm" 
-                (ngSubmit)="onSearchChange()"
-                class="relative flex items-center w-full max-w-md mx-4"
-            >
-                <input 
-                    type="search" 
-                    class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg"
-                    placeholder="Search"
-                    name="search"
-                    [(ngModel)]="shopParams.search"
-                />
-                <button mat-icon-button type="submit" 
-                    class="absolute inset-y-0 right-8 top-2 flex items-center pl-3"
+            <form 
+                    #searchForm="ngForm" 
+                    (ngSubmit)="onSearchChange()"
+                    class="relative flex items-center w-full max-w-md mx-4"
                 >
-                    <mat-icon>search</mat-icon>
-                </button>
-            </form>
+                    <input 
+                        type="search" 
+                        class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg"
+                        placeholder="Search"
+                        name="search"
+                        [(ngModel)]="shopParams.search"
+                    />
+                    <button mat-icon-button type="submit" 
+                        class="absolute inset-y-0 right-8 top-2 flex items-center pl-3"
+                    >
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </form>
 
-        <div class="flex gap-3">
-                <button class="match-input-height" mat-stroked-button (click)="openFiltersDialog()">
-                    <mat-icon>filter_list</mat-icon>
-                    Filters
-                </button>
-                <button class="match-input-height" mat-stroked-button [matMenuTriggerFor]="sortMenu">
-                    <mat-icon>swap_vert</mat-icon>
-                    Sort
-                </button>
-            </div>
-           
+            <div class="flex gap-3">
+                    <button class="match-input-height" mat-stroked-button (click)="openFiltersDialog()">
+                        <mat-icon>filter_list</mat-icon>
+                        Filters
+                    </button>
+                    <button class="match-input-height" mat-stroked-button [matMenuTriggerFor]="sortMenu">
+                        <mat-icon>swap_vert</mat-icon>
+                        Sort
+                    </button>
+                </div>
+            
+        </div>
+                <div class="grid grid-cols-5 gap-4">
+                    @for (product of (products()?.data ?? []); track product.id) {
+                        <app-product-item [product]="product"></app-product-item>
+                    }
+                </div>
     </div>
-            <div class="grid grid-cols-5 gap-4">
-                @for (product of (products()?.data ?? []); track product.id) {
-                    <app-product-item [product]="product"></app-product-item>
-                }
-            </div>
-</div>
 
 <mat-menu #sortMenu="matMenu">
         <mat-selection-list [multiple]="false" (selectionChange)="onSortChange($event)">
@@ -60,4 +61,11 @@
         </mat-selection-list>
 </mat-menu>
 
-<!-- } -->
+} @else {
+    <app-empty-state 
+        message="No products match this filter"
+        icon="filter_alt_off"
+        actionText="Reset filters"
+        (action)="resetFilters()"
+    />
+}
