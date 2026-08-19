@@ -96,6 +96,4 @@ catch (Exception ex)
     throw;
 }
 
-app.MapGet("",()=>"Hello world");
-
 app.Run();
