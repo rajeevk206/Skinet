@@ -231,7 +231,8 @@ public class PaymentsController(IPaymentService paymentService, IUnitOfWork unit
         return string.Join(
             ",",
             headerValues
-                .Select(v => v.Trim())
+                // .Select(v => v.Trim())
+                .Select(v => v?.Trim() ?? string.Empty)
                 .Where(v => !string.IsNullOrWhiteSpace(v))
         );
     }
