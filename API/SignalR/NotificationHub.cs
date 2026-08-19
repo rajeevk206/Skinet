@@ -11,7 +11,7 @@ namespace API.SignalR
     public class NotificationHub : Hub
     {
         private static readonly ConcurrentDictionary<string, string> UserConnections = new();
-
+         //
         public override Task OnConnectedAsync()
         {
             var email = Context.User?.GetEmail();
