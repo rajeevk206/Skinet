@@ -27,7 +27,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
-        policy => policy.WithOrigins("https://localhost:4200")
+        policy => policy.WithOrigins(
+            "https://localhost:4200",
+            "https://skinet-ui-azarazbygeejgefu.indiasouthcentral-01.azurewebsites.net/"
+            )
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials());
