@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace client.src.app
 {
-    public class demo.ts
+    public class demo
     {
         
     }
