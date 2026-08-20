@@ -29,7 +29,7 @@ namespace API.SignalR
 
             return base.OnDisconnectedAsync(exception);
         }
-        // comm
+        
         public static string? GetConnectionIdByEmail(string email)
         {
             UserConnections.TryGetValue(email, out var connectionId);
